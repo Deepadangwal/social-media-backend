@@ -17,13 +17,14 @@ const postSchema = mongoose.Schema({
 	// 	coordinates: []
 	// },
 	feelings: {
-		type: String
+		type: String,
+		default: 'happy'
 	},
 	dateAndTime: {
 		type: Date,
-		required: true,
+		// required: true,
 		default: Date.now()
 	}
 });
 const Post = mongoose.model('Post', postSchema);
-module.export = Post;
+module.exports = Post;
