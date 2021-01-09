@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const commentRoute = require('./routes/comments');
 const dotenv = require('dotenv');
 dotenv.config();
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
@@ -12,5 +13,6 @@ app.use(express.json());
 
 app.use('/api/auth', authRoute);
 app.use('/api/posts', postRoute);
+app.use('/api/comments', commentRoute);
 
 app.listen(3000, () => console.log('Server is running'));

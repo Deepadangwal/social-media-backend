@@ -22,9 +22,9 @@ router.post('/new/post', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
 	const { _id } = req.user;
 	const user = await User.findById(_id);
-	const allPosts = Promise.all(user.posts.map(async (postId) => await Post.findById(postId))).then(() =>
-		res.json(allPosts)
-	);
+	Promise.all(user.posts.map((postId) => Post.findById(postId)))
+		.then((result) => res.status(200).json(result))
+		.catch((err) => res.status(500).send(err));
 });
 router.get('/post/:id', async (req, res) => {
 	const post = await Post.findById(req.params.id);
